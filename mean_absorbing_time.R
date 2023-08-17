@@ -1,7 +1,8 @@
-library(boot)
+
+if("boot" %in% rownames(installed.packages()) == FALSE) {install.packages("boot")} else{library("boot")}
 
 #   ____________________________________________________________________________
-#   Balanced RW                                                             ####
+#   Unbiased RW                                                             ####
 
 
 tot_walks <- 3000
@@ -11,7 +12,7 @@ stop <- c() #store the number of steps before hitting an absorbing barrier
 
 for(walk in 1:tot_walks){
     
-    x <- 30 + cumsum(sample(c(-1, 1), length_walk, TRUE)) # simulate a balanced random walk
+    x <- 30 + cumsum(sample(c(-1, 1), length_walk, TRUE)) # simulate a unbiased random walk
                                                           # of 2500 steps starting from 30
     
     counter <- 1
@@ -36,7 +37,7 @@ In our example k = 30 and N=0 so Lk=k(N-k)=600 agrees with the results from our 
 
 
 #   ____________________________________________________________________________
-#   Unbalanced RW                                                           ####
+#   Biased RW                                                           ####
 
 tot_walks <- 3000
 length_walk <- 2500 # 2500 steps
@@ -45,7 +46,7 @@ stop <- c() #store the number of steps before hitting an absorbing barrier
 
 for(walk in 1:tot_walks){
   
-  x <- 30 + cumsum(sample(c(-1, 1), length_walk, TRUE, prob = c(0.45,0.55))) # simulate a unbalanced random walk
+  x <- 30 + cumsum(sample(c(-1, 1), length_walk, TRUE, prob = c(0.45,0.55))) # simulate a biased random walk
                                                                              # of 2500 steps starting from 30
                                                                              # with p(xn=+1) = 0.55
 
